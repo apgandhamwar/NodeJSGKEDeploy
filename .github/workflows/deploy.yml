@@ -1,7 +1,9 @@
 name: Deploy Hello World to GKE
 
 on:
-  workflow_dispatch
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
