@@ -23,7 +23,7 @@ jobs:
 
       - name: Build and push Docker image
         env:
-          PROJECT_ID: your-gcp-project-id
+          PROJECT_ID: ardent-case-465107-c9
           IMAGE_NAME: hello-world-app
           IMAGE_TAG: ${{ github.sha }}
         run: |
@@ -33,10 +33,10 @@ jobs:
       - name: Get GKE credentials
         uses: google-github-actions/get-gke-credentials@v2
         with:
-          cluster_name: your-gke-cluster-name
-          location: your-gke-cluster-location # e.g., us-central1-a or us-central1
+          cluster_name: mycluster1
+          location: us-central1
 
       - name: Deploy to GKE
         run: |
-          kubectl apply -f k8s/deployment.yaml # Assuming your Kubernetes manifests are in a 'k8s' directory
+          kubectl apply -f deployment.yaml # Assuming your Kubernetes manifests are in a 'k8s' directory
           kubectl set image deployment/hello-world-deployment hello-world-container=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG}
