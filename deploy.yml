@@ -1,0 +1,44 @@
+name: Deploy Hello World to GKE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Google Container Registry
+        run: gcloud auth configure-docker
+
+      - name: Build and push Docker image
+        env:
+          PROJECT_ID: your-gcp-project-id
+          IMAGE_NAME: hello-world-app
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG} .
+          docker push gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG}
+
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: your-gke-cluster-name
+          location: your-gke-cluster-location # e.g., us-central1-a or us-central1
+
+      - name: Deploy to GKE
+        run: |
+          kubectl apply -f k8s/deployment.yaml # Assuming your Kubernetes manifests are in a 'k8s' directory
+          kubectl set image deployment/hello-world-deployment hello-world-container=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG}
