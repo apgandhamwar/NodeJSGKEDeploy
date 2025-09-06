@@ -38,5 +38,5 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          kubectl apply -f deployment.yaml # Assuming your Kubernetes manifests are in a 'k8s' directory
+          kubectl apply -f deployment.yml # Assuming your Kubernetes manifests are in a 'k8s' directory
           kubectl set image deployment/hello-world-deployment hello-world-container=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG}
