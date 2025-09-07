@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: hello-world-container
-          image: gcr.io/ardent-case-465107-c9/hello-world-app:d642f2adecca12c6f96440e990cedf2e4d71ed20
+          image: gcr.io/ardent-case-465107-c9/hello-world-app:fdf76de530f38898e4c5c7906a61a0d8094aace7
           ports:
             - containerPort: 8080 # Or your application's port
 ---
