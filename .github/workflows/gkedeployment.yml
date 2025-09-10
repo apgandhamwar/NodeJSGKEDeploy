@@ -15,11 +15,12 @@ on:
         description: 'A IMAGE TAG input variable'
         type: string
         required: true 
-      
-    
-
-
-- name: Get GKE credentials
+        
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get GKE credentials
         uses: google-github-actions/get-gke-credentials@v2
         with:
           cluster_name: mycluster1
