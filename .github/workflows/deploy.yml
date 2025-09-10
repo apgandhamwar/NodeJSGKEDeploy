@@ -12,6 +12,7 @@ jobs:
 
   testgkedeploy:
      runs-on: ubuntu-latest
+     needs: deploy
      steps:
        - uses: actions/checkout@v4
        - name: Call the reusable workflow
