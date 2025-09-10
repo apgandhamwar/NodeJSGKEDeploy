@@ -17,7 +17,11 @@ on:
       IMAGE_TAG:
         description: 'A IMAGE TAG input variable'
         type: string
-        required: true 
+        required: true
+      deployment_file_path:
+        description: 'The path to the deployment file'
+        required: true
+        type: string
         
 jobs:
   deploy:
@@ -35,5 +39,5 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          kubectl apply -f deployment.yml
+          kubectl apply -f ${{ inputs.deployment_file_path }}
           kubectl set image deployment/hello-world-deployment hello-world-container=gcr.io/${{ inputs.PROJECT_ID }}/${{ inputs.IMAGE_NAME }}:${{ inputs.IMAGE_TAG }}
