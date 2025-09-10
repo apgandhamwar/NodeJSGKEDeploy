@@ -16,7 +16,7 @@ spec:
         - name: hello-world-container
           image: gcr.io/ardent-case-465107-c9/hello-world-app:fdf76de530f38898e4c5c7906a61a0d8094aace7
           ports:
-            - containerPort: 8080 # Or your application's port
+            - containerPort: 3000 # Or your application's port
 ---
 apiVersion: v1
 kind: Service
@@ -28,5 +28,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080 # Or your application's port
+      targetPort: 3000 # Or your application's port
   type: LoadBalancer # Or ClusterIP, NodePort depending on your needs
