@@ -31,6 +31,9 @@ jobs:
           docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
+  testgkedeploy:
+    runs-on: ubuntu-latest
+    steps:
       - name: Call reusable workflow
         uses: apgandhamwar/NodeJSGKEDeploy/.github/workflows/gkedeployment.yml@main # Replace with your repo and branch/tag
         with:
