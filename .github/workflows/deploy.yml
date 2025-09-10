@@ -11,11 +11,11 @@ env:
 jobs:
 
   testgkedeploy:
-    uses: apgandhamwar/NodeJSGKEDeploy/.github/workflows/gkedeployment.yml@main # Replace with your repo and branch/tag
-    with:
-      PROJECT_ID: ${{ env.PROJECT_ID }}
-      IMAGE_NAME: ${{ env.IMAGE_NAME }}
-      IMAGE_TAG: ${{ env.IMAGE_TAG }}
+   uses: apgandhamwar/NodeJSGKEDeploy/.github/workflows/gkedeployment.yml@main # Replace with your repo and branch/tag
+   with:
+     PROJECT_ID: ${{ env.PROJECT_ID }}
+     IMAGE_NAME: ${{ env.IMAGE_NAME }}
+     IMAGE_TAG: ${{ env.IMAGE_TAG }}
       
   deploy:
     runs-on: ubuntu-latest
