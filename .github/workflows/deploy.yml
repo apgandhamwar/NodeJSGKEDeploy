@@ -28,6 +28,7 @@ jobs:
        PROJECT_ID: ${{ needs.prepare-variables.outputs.PROJECT_ID }}
        IMAGE_NAME: ${{ needs.prepare-variables.outputs.IMAGE_NAME }}
        IMAGE_TAG: ${{ needs.prepare-variables.outputs.IMAGE_TAG }}
+       deployment_file_path: ./deployment.yml
       
   deploy:
     needs: prepare-variables
