@@ -15,9 +15,9 @@ jobs:
     steps:
        - run: echo "null"
     outputs:
-      PROJECT_ID: ${{ env.MAVEN_VERSION }}
-      IMAGE_NAME: ${{ env.MAVEN_VERSION }}
-      IMAGE_TAG: ${{ env.MAVEN_VERSION }}
+      PROJECT_ID: ${{ env.PROJECT_ID }}
+      IMAGE_NAME: ${{ env.IMAGE_NAME }}
+      IMAGE_TAG: ${{ env.IMAGE_TAG }}
       
   testgkedeploy:
      needs: deploy
