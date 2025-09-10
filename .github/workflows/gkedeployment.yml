@@ -2,6 +2,9 @@ name: Deploy Hello World to GKE
 
 on:
   workflow_call:
+    secrets:
+      google_credentials:
+        required: true
     inputs:
       PROJECT_ID:
         description: 'A PROJECT ID input variable'
@@ -23,7 +26,7 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          credentials_json: ${{ secrets.google_credentials }}
       - name: Get GKE credentials
         uses: google-github-actions/get-gke-credentials@v2
         with:
