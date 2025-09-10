@@ -1,1 +1,31 @@
+name: Deploy Hello World to GKE
 
+on:
+  workflow_call:
+    inputs:
+      PROJECT_ID:
+        description: 'A PROJECT ID input variable'
+        type: string
+        required: true
+      IMAGE_NAME:
+        description: 'A IMAGE NAME input variable'
+        type: string
+        required: true
+      IMAGE_TAG:
+        description: 'A IMAGE TAG input variable'
+        type: string
+        required: true 
+      
+    
+
+
+- name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: mycluster1
+          location: us-central1
+
+      - name: Deploy to GKE
+        run: |
+          kubectl apply -f deployment.yml
+          kubectl set image deployment/hello-world-deployment hello-world-container=gcr.io/${{ inputs.PROJECT_ID }}/${{ inputs.IMAGE_NAME }}:${{ inputs.IMAGE_TAG }}
