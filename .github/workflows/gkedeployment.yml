@@ -44,6 +44,7 @@ jobs:
           version: v3.14.0
       - name: Deploy Helm chart
         run: |
+          echo "Image tag is ${{ inputs.IMAGE_TAG }}"
           helm upgrade --install hello-world ./hello-world \
             --namespace default \
-            --set image.tag=${{ inputs.IMAGE_TAG }} 
+            --set image.tag=${{ github.event.inputs.IMAGE_TAG }}
