@@ -47,4 +47,6 @@ jobs:
           echo "Image Tag is ${{ inputs.IMAGE_TAG }}"
           helm upgrade --install hello-world ./hello-world \
             --namespace default \
-            --set image.tag=${{ inputs.IMAGE_TAG }}
+            --set image.tag=${{ inputs.IMAGE_TAG }} \
+            --set image.name=${{ inputs.IMAGE_NAME }} \
+            --set image.repository=gcr.io/${{ inputs.PROJECT_ID }}
