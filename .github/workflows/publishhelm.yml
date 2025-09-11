@@ -37,10 +37,18 @@ jobs:
         uses: azure/setup-helm@v4
         with:
           version: v3.14.0
+
+      - name: Update image version
+        run: |
+          echo "Image Tag is ${{ inputs.IMAGE_TAG }}"
+          helm install hello-world ./hello-world \
+            --namespace default \
+            --set image.tag=${{ inputs.IMAGE_TAG }} \
+            --set image.name=${{ inputs.IMAGE_NAME }} \
+            --set image.repository=gcr.io/${{ inputs.PROJECT_ID }}
       - name: Package Helm Chart
         run: |
           helm package hello-world
-
       - name: Push Helm Chart to Artifact Registry
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev # Authenticate Docker for Helm OCI push
