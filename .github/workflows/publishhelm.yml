@@ -45,6 +45,7 @@ jobs:
       - name: Update image version
         run: |
           echo "Image Tag is ${{ inputs.IMAGE_TAG }}"
+          helm uninstall hello-world -n default
           helm install hello-world ./hello-world \
             --namespace default \
             --set image.tag=${{ inputs.IMAGE_TAG }} \
