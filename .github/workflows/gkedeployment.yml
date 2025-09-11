@@ -41,8 +41,8 @@ jobs:
       - name: Deploy Helm Chart
         uses: 'helm/deploy@v1.4.2' # Or another suitable Helm action
         with:
-          chart: ./path/to/your/helm-chart # Path to your local chart
-          release-name: my-app-release
+          chart: ./hello-world/Chart.yml # Path to your local chart
+          release-name: hello-world
           namespace: default
           values: |
             image:
