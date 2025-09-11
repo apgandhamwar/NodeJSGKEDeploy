@@ -9,9 +9,9 @@ env:
   IMAGE_TAG: ${{ github.sha }}
 
 jobs: 
-  testgkedeploy:
+  publishtogcr:
      needs: deploy
-     uses: ./.github/workflows/gkedeployment.yml # Replace with your repo and branch/tag
+     uses: ./.github/workflows/publishhelm.yml
      secrets:
           google_credentials: ${{ secrets.GCP_SA_KEY }}
      with:
