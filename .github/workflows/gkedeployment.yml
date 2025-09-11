@@ -38,8 +38,12 @@ jobs:
         with:
           cluster_name: mycluster1
           location: us-central1
-
-      - name: Deploy to GKE
-        run: |
-          kubectl apply -f ${{ inputs.deployment_file_path }}
-          kubectl set image deployment/hello-world-deployment hello-world-container=gcr.io/${{ inputs.PROJECT_ID }}/${{ inputs.IMAGE_NAME }}:${{ inputs.IMAGE_TAG }}
+      - name: Deploy Helm Chart
+        uses: 'helm/deploy@v1.4.2' # Or another suitable Helm action
+        with:
+          chart: ./path/to/your/helm-chart # Path to your local chart
+          release-name: my-app-release
+          namespace: default
+          values: |
+            image:
+              tag: ${{ inputs.IMAGE_TAG }}
