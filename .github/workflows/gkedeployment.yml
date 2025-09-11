@@ -38,12 +38,12 @@ jobs:
         with:
           cluster_name: mycluster1
           location: us-central1
-      - name: Deploy Helm Chart
-        uses: 'helm/deploy@v1.4.2' # Or another suitable Helm action
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
         with:
-          chart: ./hello-world/Chart.yaml # Path to your local chart
-          release-name: hello-world
-          namespace: default
-          values: |
-            image:
-              tag: ${{ inputs.IMAGE_TAG }}
+          version: v3.14.0
+      - name: Deploy Helm chart
+        run: |
+          helm upgrade --install hello-world ./hello-world \
+            --namespace default \
+            --set image.tag=${{ inputs.IMAGE_TAG }} 
