@@ -8,17 +8,7 @@ env:
   IMAGE_NAME: hello-world-app
   IMAGE_TAG: ${{ github.sha }}
 
-jobs:
-
-  prepare-variables:
-    runs-on: ubuntu-latest
-    steps:
-       - run: echo "null"
-    outputs:
-      PROJECT_ID: ${{ env.PROJECT_ID }}
-      IMAGE_NAME: ${{ env.IMAGE_NAME }}
-      IMAGE_TAG: ${{ env.IMAGE_TAG }}
-      
+jobs: 
   testgkedeploy:
      needs: deploy
      uses: ./.github/workflows/gkedeployment.yml # Replace with your repo and branch/tag
@@ -31,7 +21,6 @@ jobs:
        deployment_file_path: ./config/deployment.yml
       
   deploy:
-    needs: prepare-variables
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -52,4 +41,8 @@ jobs:
         run: |
           docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+    outputs:
+      PROJECT_ID: ${{ env.PROJECT_ID }}
+      IMAGE_NAME: ${{ env.IMAGE_NAME }}
+      IMAGE_TAG: ${{ env.IMAGE_TAG }}
 
