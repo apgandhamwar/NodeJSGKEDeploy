@@ -61,3 +61,11 @@ jobs:
       - name: Push Helm Chart to Artifact Registry
         run: |
           helm push hello-world-*.tgz oci://us-central1-docker.pkg.dev/${{ inputs.PROJECT_ID }}/helm-charts-repo
+
+      - name: Deploy Helm chart
+        run: |
+          echo "Image Tag is ${{ inputs.IMAGE_TAG }}"
+          helm upgrade --install hello-world ./hello-world \
+            --namespace default \
+            --set image.repository=us-central1-docker.pkg.dev/${{ inputs.PROJECT_ID }}/helm-charts-repo/hello-world
+            --set image.tag=${{ inputs.IMAGE_TAG }}
