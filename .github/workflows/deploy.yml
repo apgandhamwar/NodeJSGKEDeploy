@@ -5,7 +5,7 @@ on:
 
 env:
   PROJECT_ID: ardent-case-465107-c9
-  IMAGE_NAME: hello-world-app
+  IMAGE_NAME: hello-world
   IMAGE_TAG: ${{ github.sha }}
 
 jobs: 
