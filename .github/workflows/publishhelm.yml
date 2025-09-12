@@ -67,5 +67,6 @@ jobs:
           echo "Image Tag is ${{ inputs.IMAGE_TAG }}"
           helm upgrade --install hello-world ./hello-world \
             --namespace default \
-            --set image.repository=us-central1-docker.pkg.dev/${{ inputs.PROJECT_ID }}/helm-charts-repo/hello-world
+            --set image.repository=us-central1-docker.pkg.dev/${{ inputs.PROJECT_ID }}/helm-charts-repo \
+            --set image.name=${{ inputs.IMAGE_NAME }} \
             --set image.tag=${{ inputs.IMAGE_TAG }}
